@@ -1,5 +1,8 @@
 package br.com.thyme.oldproject;
 
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -15,10 +18,19 @@ import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
 @Configuration
-@EnableWebMvc					
-@ComponentScan(basePackages = {"br.com.thyme.oldproject", "br.com.thyme.boot"})
-public class Webconfig extends WebMvcConfigurerAdapter {
+@EnableWebMvc
+public class Webconfig extends WebMvcConfigurerAdapter implements ApplicationContextAware {
 
+	
+	private ApplicationContext applicationContext; 
+	
+	
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+	this.applicationContext = applicationContext; 
+		
+	}
+	
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -38,8 +50,8 @@ public class Webconfig extends WebMvcConfigurerAdapter {
 	@Bean 
     public ServletContextTemplateResolver templateResolver() {
         ServletContextTemplateResolver resolver = new ServletContextTemplateResolver();
-        resolver.setPrefix("/templates/");
-        resolver.setSuffix("html");
+        resolver.setPrefix("/resources/templates/");
+        resolver.setSuffix(".html");
         resolver.setTemplateMode("HTML5");
         resolver.setOrder(1);
         return resolver;
@@ -76,8 +88,8 @@ public class Webconfig extends WebMvcConfigurerAdapter {
         resolver.setTemplateEngine(templateEngine());
         return resolver;
     }
-	
-	
-	
+
+
+    
 	
 }
