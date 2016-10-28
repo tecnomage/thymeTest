@@ -21,11 +21,5 @@ public class Boot
      ApplicationContext ctx = SpringApplication.run(Boot.class, args);
      System.out.println(ctx.getDisplayName());
    }
-
-   @RequestMapping("/")
-   public String home()
-   {
-      return "index";
-   }
-
+ 
 }
