@@ -45,4 +45,13 @@ public class HelloController {
 
 		return sobre;
 	}
-}
+	
+	@RequestMapping("/menu")
+	public ModelAndView menu(){
+	ModelAndView menu = new ModelAndView("menu");
+	return menu;
+	
+	}
+	}
+	
+
